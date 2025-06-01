@@ -36,6 +36,12 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+  };
+  
+
   const toggleTask = (id) => {
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, completed: !task.completed } : task
@@ -64,28 +70,43 @@ function App() {
   };
 
   const TaskPage = () => (
-    <div className="App">
-      <h1>To-Do List</h1>
-      <TaskForm onAdd={addTask} />
-      {editingTask && (
-        <div className="edit-form">
-          <input
-            type="text"
-            value={taskText}
-            onChange={(e) => setTaskText(e.target.value)}
-          />
-          <button onClick={saveEdit}>Salvează</button>
-          <button onClick={cancelEdit}>Anulează</button>
-        </div>
-      )}
-      <TaskList
-        tasks={tasks}
-        onDelete={deleteTask}
-        onToggle={toggleTask}
-        onEdit={startEditing}
-      />
-    </div>
-  );
+  <div className="App">
+    <h1>To-Do List</h1>
+    <button
+      style={{
+        backgroundColor: '#ff4c4c',
+        color: 'white',
+        border: 'none',
+        borderRadius: '4px',
+        padding: '10px 15px',
+        cursor: 'pointer',
+        marginBottom: '15px'
+      }}
+      onClick={handleLogout}
+    >
+      Logout
+    </button>
+    <TaskForm onAdd={addTask} />
+    {editingTask && (
+      <div className="edit-form">
+        <input
+          type="text"
+          value={taskText}
+          onChange={(e) => setTaskText(e.target.value)}
+        />
+        <button onClick={saveEdit}>Salvează</button>
+        <button onClick={cancelEdit}>Anulează</button>
+      </div>
+    )}
+    <TaskList
+      tasks={tasks}
+      onDelete={deleteTask}
+      onToggle={toggleTask}
+      onEdit={startEditing}
+    />
+  </div>
+);
+
 
   return (
     <Router>
