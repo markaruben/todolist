@@ -1,52 +1,109 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: #4CAF50;
+  padding: 10px 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-body {
-  background: linear-gradient(135deg, #e0f7fa, #fce4ec);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.navbar h2 {
+  margin: 0;
 }
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.btn-logout {
+  background-color: #ff4c4c;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 15px;
+}
+
+.btn-logout:hover {
+  background-color: #e03a3a;
+}
+
+/* Păstrează stilurile vechi pentru login și sign up */
 
 .App {
   background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 420px;
-  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  padding: 20px;
+  margin: 60px auto 0; /* Lasă spațiu pentru navbar sticky */
   text-align: center;
 }
 
-/* Titlu */
-h1, h2 {
-  color: #2e7d32;
+h1 {
+  color: #4CAF50;
+  font-size: 2em;
   margin-bottom: 20px;
 }
 
-/* Formulare */
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+}
+.App {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  padding: 20px;
+  text-align: center;
 }
 
-input {
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: border 0.3s;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
 }
 
-input:focus {
-  border-color: #4CAF50;
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #4CAF50;
 }
 
 button {
@@ -55,51 +112,10 @@ button {
   background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #388e3c;
-}
-
-/* Lista de sarcini */
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
-li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f3f3f3;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-}
-
-li.completed {
-  background-color: #e0e0e0;
-  text-decoration: line-through;
-}
-
-input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-.login-form p {
-  margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-.login-form a {
-  color: #388e3c;
-  text-decoration: none;
-}
-
-.login-form a:hover {
-  text-decoration: underline;
+  background-color: #45a049;
 }
