@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import TaskManager from './TaskManager';
+import TaskManager from './components/TaskManager';
 import Login from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import Navbar from './components/Navbar';
