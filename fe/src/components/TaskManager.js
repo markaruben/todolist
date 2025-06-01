@@ -44,7 +44,9 @@ export const TaskManager = () => {
   };
 
   const handleEdit = (id) => {
-    console.log(`Editare task cu ID: ${id}`);
+    setTasks(tasks.map(task => 
+      task.id === id ? { ...task, title: newTitle } : task
+    ));
   };
 
   return (
