@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ setIsAuthenticated }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://localhost:7140/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("http://localhost:5198/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
     });
 
     if (response.ok) {
       const data = await response.json();
-      localStorage.setItem('token', data.token);
+      localStorage.setItem("token", data.token);
       setIsAuthenticated(true);
-      navigate('/');
+      navigate("/");
     } else {
-      alert('Login failed');
+      alert("Login failed");
     }
   };
 

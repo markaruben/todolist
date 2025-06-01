@@ -1,6 +1,5 @@
-// Navbar.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ isAuthenticated, handleLogout }) => {
   return (
@@ -9,13 +8,21 @@ const Navbar = ({ isAuthenticated, handleLogout }) => {
       <div>
         {isAuthenticated ? (
           <>
-            <Link to="/todo" className="nav-link">Taskuri</Link>
-            <button className="btn-logout" onClick={handleLogout}>Logout</button>
+            <Link to="/todo" className="nav-link">
+              Taskuri
+            </Link>
+            <button className="btn-logout" onClick={handleLogout}>
+              Logout
+            </button>
           </>
         ) : (
           <>
-            <Link to="/" className="nav-link">Login</Link>
-            <Link to="/signup" className="nav-link">Sign Up</Link>
+            <Link to="/" className="nav-link">
+              Login
+            </Link>
+            <Link to="/signup" className="nav-link">
+              Sign Up
+            </Link>
           </>
         )}
       </div>

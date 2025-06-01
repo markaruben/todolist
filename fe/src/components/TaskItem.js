@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
+import "./TaskItem.css";
 const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(task.title);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const handleDelete = async () => {
     await fetch(`http://localhost:5198/api/TodoItems/${task.id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -17,9 +18,9 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
 
   const handleToggle = async () => {
     await fetch(`http://localhost:5198/api/TodoItems/${task.id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -32,12 +33,12 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
   };
 
   const handleSave = async () => {
-    if (editTitle.trim() === '') return;
+    if (editTitle.trim() === "") return;
 
     await fetch(`http://localhost:5198/api/TodoItems/${task.id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -52,7 +53,7 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
   };
 
   return (
-    <li className={`task-item ${task.isCompleted ? 'completed' : ''}`}>
+    <li className={`task-item ${task.isCompleted ? "completed" : ""}`}>
       <input
         type="checkbox"
         checked={task.isCompleted}
@@ -67,14 +68,25 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
           />
-          <button className="btn btn-save" onClick={handleSave}>Salvează</button>
-          <button className="btn btn-cancel" onClick={() => setIsEditing(false)}>Anulează</button>
+          <button className="btn btn-save" onClick={handleSave}>
+            Salvează
+          </button>
+          <button
+            className="btn btn-cancel"
+            onClick={() => setIsEditing(false)}
+          >
+            Anulează
+          </button>
         </>
       ) : (
         <>
           <span className="task-title">{task.title}</span>
-          <button className="btn btn-edit" onClick={() => setIsEditing(true)}>Editează</button>
-          <button className="btn btn-delete" onClick={handleDelete}>Șterge</button>
+          <button className="btn btn-edit" onClick={() => setIsEditing(true)}>
+            Editează
+          </button>
+          <button className="btn btn-delete" onClick={handleDelete}>
+            Șterge
+          </button>
         </>
       )}
     </li>
