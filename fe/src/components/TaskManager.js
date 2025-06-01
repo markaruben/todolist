@@ -43,10 +43,12 @@ export const TaskManager = () => {
     );
   };
 
-  const handleEdit = (id) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, title: newTitle } : task
-    ));
+  const handleEdit = (id, newTitle) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, title: newTitle } : task
+      )
+    );
   };
 
   return (
