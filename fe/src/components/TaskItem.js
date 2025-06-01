@@ -9,8 +9,8 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
     await fetch(`http://localhost:5198/api/TodoItems/${task.id}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${token}`,
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     onDelete(task.id);
   };
@@ -20,25 +20,25 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         id: task.id,
         title: task.title,
         isCompleted: !task.isCompleted,
-      })
+      }),
     });
     onToggle(task.id);
   };
 
-  const handleEditSubmit = async () => {
+  const handleSave = async () => {
     if (editTitle.trim() === '') return;
 
     await fetch(`http://localhost:5198/api/TodoItems/${task.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         id: task.id,
@@ -52,27 +52,29 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
   };
 
   return (
-    <li>
+    <li className={`task-item ${task.isCompleted ? 'completed' : ''}`}>
       <input
         type="checkbox"
         checked={task.isCompleted}
         onChange={handleToggle}
       />
+
       {isEditing ? (
         <>
           <input
+            className="edit-input"
             type="text"
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
           />
-          <button onClick={handleEditSubmit}>Salvează</button>
-          <button onClick={() => { setIsEditing(false); setEditTitle(task.title); }}>Anulează</button>
+          <button className="btn btn-save" onClick={handleSave}>Salvează</button>
+          <button className="btn btn-cancel" onClick={() => setIsEditing(false)}>Anulează</button>
         </>
       ) : (
         <>
-          <span>{task.title}</span>
-          <button onClick={() => setIsEditing(true)}>Editează</button>
-          <button onClick={handleDelete}>Șterge</button>
+          <span className="task-title">{task.title}</span>
+          <button className="btn btn-edit" onClick={() => setIsEditing(true)}>Editează</button>
+          <button className="btn btn-delete" onClick={handleDelete}>Șterge</button>
         </>
       )}
     </li>
