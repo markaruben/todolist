@@ -1,4 +1,5 @@
 import React from 'react';
+import './TaskItem.css';
 
 const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
   const token = localStorage.getItem('token');
@@ -36,11 +37,12 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }) => {
         checked={task.isCompleted}
         onChange={handleToggle}
       />
-      {task.title}
+      <span className="task-title">{task.title}</span>
       <button onClick={handleDelete}>Șterge</button>
       <button onClick={() => onEdit(task.id)}>Editează</button>
     </li>
   );
+  
 };
 
 export default TaskItem;
