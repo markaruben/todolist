@@ -21,19 +21,24 @@ namespace TodoApp.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TodoItemDto>>> GetTodoItems()
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
         {
-            var items = await _context.TodoItems.Include(t => t.User).ToListAsync();
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var itemsDto = items.Select(t => new TodoItemDto
+            if (!int.TryParse(userIdString, out int userId))
             {
-                Id = t.Id,
-                Title = t.Title,
-                IsCompleted = t.IsCompleted
-            }).ToList();
+                return Unauthorized();
+            }
 
-            return Ok(itemsDto);
+            var items = await _context.TodoItems
+                .Where(t => t.UserId == userId)
+                .ToListAsync();
+
+            return Ok(items);
         }
+
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItemDto>> GetTodoItem(int id)
